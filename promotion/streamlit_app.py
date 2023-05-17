@@ -149,9 +149,35 @@ image7 = Image.open('images/moldova_promotion_engl.png')
 # grün= auf beiden vorkommend, blau = nur auf russischen WPs vorkommend, red = nur auf englischen WPS vorkommend
 image6 = Image.open('images/moldova_wordcloud_engl_ru.png')
 
+# C8 = altair Diagramme einfügen
+# Make radio button less cramped by adding a space after each label
+# The spacing will only show up in your IDE, not on this doc page
+# options = ['A0-A1', 'A2-A3', 'A4', 'A5', '<A5']
+# labels = [option + ' ' for option in options]
 
+# input_dropdown = alt.binding_radio(
+#     # Add the empty selection which shows all when clicked
+#     options=options + [None],
+#     labels=labels + ['All'],
+#     name='Größe: '
+# )
+# # problem with selection_point
+# selection = alt.selection_point(
+#     fields=['Größe'],
+#     bind=input_dropdown,
+# )
 
-
+# chart = alt.Chart(df).mark_point().encode(
+#     x='WÖrum:Q',
+#     y='WÖrus:Q',
+#     # We need to set a constant domain to preserve the colors
+#     # when only one region is shown at a time
+#     color=alt.Color('Größe:N').scale(domain=options),
+# ).add_params(
+#     selection
+# ).transform_filter(
+#     selection
+# )
 
 ## Set the LAYOUT 
 c1, c2 = st.columns([1,3])
@@ -176,11 +202,13 @@ with st.container():
     c5.write(fig2)
     
 with st.container(): 
-    c6.write(image6, caption="WordCloud: Vergleich Wörter der russischen und englischen Werbeplakate (grün- auf beiden vorkommend, rot- auf englischen WPs, blau- auf russischen WPs)", use_column_width=True)
-    c7.write(image7, caption="WordCloud der Wörter auf englischen Werbeplakaten", use_column_width=True)
-
-with st.container(): 
-    #Altair
-    c8.write("Diagramm Größe des Werbeplakates und Sprache vorhanden- BITTE EIN SANKEY DIAGRAM DARAUS MACHEN DANKE!")
-    c8.write(fig7)
-    c9.write("Wörter ro und Wörter Russisch und Größe der Werbeplakate mit slider NOCH EINEN TITEL EINFÜGEN DANKE!")
+    c7.write("Diagramm Größe des Werbeplakates und Sprache vorhanden- BITTE EIN SANKEY DIAGRAM DARAUS MACHEN DANKE!")
+    c7.write(fig7)
+    # c8.write(chart) 
+    # "Wörter ro und Wörter Russisch und Größe der Werbeplakate mit slider NOCH EINEN TITEL EINFÜGEN DANKE!")
+    c9.image(image9, caption="WordCloud der Wörter auf englischen Werbeplakaten", use_column_width=True)
+    c9.image(image5, caption="WordCloud: Vergleich Wörter der russischen und englischen Werbeplakate (grün- auf beiden vorkommend, rot- auf englischen WPs, blau- auf russischen WPs)", use_column_width=True)
+    
+with st.container():
+    c4.write(fig1)
+    c6.write(fig2)
