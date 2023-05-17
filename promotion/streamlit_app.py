@@ -104,6 +104,10 @@ ax2.legend(labels=df_dominant.iloc[0:4, 0], loc="lower right")
 ## C3 
         # load data to display the dataset 'Korpus Mehrsprachigkeit'
 df = pd.read_csv('data/korpusdaten_multi.csv')
+df['WÖrum'] = df['ÜBSPrum'] + df['FTSPrum']
+df['WÖrus'] = df['ÜBSPruss'] + df['FTSPruss']
+df['WÖengl'] = df['ÜBSPengl'] + df['FTSPengl']
+df['WÖmold'] = df['ÜBSPmold'] + df['FTSPmold']
 
 # C2 = Wordcloud with Moldova Flag
 image2 = Image.open('images/moldova_img_better_better.png')
@@ -131,10 +135,40 @@ image9 = Image.open('images/moldova_promotion_engl.png')
 # grün= auf beiden vorkommend, blau = nur auf russischen WPs vorkommend, red = nur auf englischen WPS vorkommend
 image5 = Image.open('images/moldova_wordcloud_engl_ru.png')
 
+# C8 = altair Diagramme einfügen
+# Make radio button less cramped by adding a space after each label
+# The spacing will only show up in your IDE, not on this doc page
+# options = ['A0-A1', 'A2-A3', 'A4', 'A5', '<A5']
+# labels = [option + ' ' for option in options]
+
+# input_dropdown = alt.binding_radio(
+#     # Add the empty selection which shows all when clicked
+#     options=options + [None],
+#     labels=labels + ['All'],
+#     name='Größe: '
+# )
+# # problem with selection_point
+# selection = alt.selection_point(
+#     fields=['Größe'],
+#     bind=input_dropdown,
+# )
+
+# chart = alt.Chart(df).mark_point().encode(
+#     x='WÖrum:Q',
+#     y='WÖrus:Q',
+#     # We need to set a constant domain to preserve the colors
+#     # when only one region is shown at a time
+#     color=alt.Color('Größe:N').scale(domain=options),
+# ).add_params(
+#     selection
+# ).transform_filter(
+#     selection
+# )
+
 ## Set the LAYOUT 
 c2, c3 = st.columns([3,1])
-c4, c5, c6 = st.columns(3)
-c7, c8, c9 = st.columns(3)
+c4, c6 = st.columns(2)
+c7, c9 = st.columns(2)
 
 with st.container():
     # c1.write("Pie Chart Korpus Mehrsprachigkeit Sprachverteilung")
@@ -146,10 +180,11 @@ with st.container():
 with st.container(): 
     c7.write("Diagramm Größe des Werbeplakates und Sprache vorhanden- BITTE EIN SANKEY DIAGRAM DARAUS MACHEN DANKE!")
     c7.write(fig7)
-    c8.write("Wörter ro und Wörter Russisch und Größe der Werbeplakate mit slider NOCH EINEN TITEL EINFÜGEN DANKE!")
+    # c8.write(chart) 
+    # "Wörter ro und Wörter Russisch und Größe der Werbeplakate mit slider NOCH EINEN TITEL EINFÜGEN DANKE!")
     c9.image(image9, caption="WordCloud der Wörter auf englischen Werbeplakaten", use_column_width=True)
-
+    c9.image(image5, caption="WordCloud: Vergleich Wörter der russischen und englischen Werbeplakate (grün- auf beiden vorkommend, rot- auf englischen WPs, blau- auf russischen WPs)", use_column_width=True)
+    
 with st.container():
     c4.write(fig1)
-    c5.image(image5, caption="WordCloud: Vergleich Wörter der russischen und englischen Werbeplakate (grün- auf beiden vorkommend, rot- auf englischen WPs, blau- auf russischen WPs)", use_column_width=True)
     c6.write(fig2)
