@@ -1,3 +1,4 @@
+# Import the required packages
 import streamlit as st
 import pandas as pd
 import altair as alt
@@ -11,8 +12,11 @@ st. set_page_config(layout="wide")
 st.title('Korpus Mehrsprachigkeit')
 st.caption('Chisinau | Republik Moldau | von 2013 bis 2017 | 5981 | signs')
 
-## C4 = DONUT CHART for vorhandene Sprache
+## C1 = Sankey Chart with Sprachverteilung im Korpus Mehrsprachigkeit DANKE!
 
+
+
+## C4 = DONUT CHART for vorhandene Sprache
     # load data to display the datatset 'Sprachen vorhanden'
 df_vorhanden = pd.read_csv('data/vorhanden.csv', sep=";")
 
@@ -21,41 +25,43 @@ x2 = df_vorhanden.iloc[9:18, 1] # 2014
 x1 = df_vorhanden.iloc[27:36, 1] #2017
     # color
 colors = ['#277da1', '#577590', '#4d908e', '#43aa8b', '#90be6d', '#f9c74f', '#f9844a', '#f8961e', '#f3722c']
-
-fig1,ax1 = plt.subplots(figsize = (12, 14))
-
+fig1,ax1 = plt.subplots(figsize = (12, 10))
 ax1.pie(x1,
         startangle=90, colors= colors, pctdistance=0.88, 
         # autopct = lambda p: format(p, '.1f') if p > 4 else None,
         autopct = lambda p: '{:.1f}%\n (2017)'.format(p) if p > 4 else None,
-        radius=1.0, labeldistance=1.05, textprops={'fontweight': 'normal', 'fontsize': 12},
+        radius=1.0, labeldistance=1.05, textprops={'ha':'center'},
         wedgeprops = { 'linewidth': 3, 'edgecolor': 'white'}) # draw the first Pie chart \n (2017)
 ax1.pie(x2,
         startangle=90, colors= colors, pctdistance=0.85,
         # autopct = lambda p: format(p, '.1f') if p > 4 else None,
         autopct = lambda p: '{:.1f}%\n (2014)'.format(p) if p > 4 else None,
-        radius=0.75,labeldistance=1.05, textprops={'fontweight': 'normal', 'fontsize': 12},
+        radius=0.75,labeldistance=1.05, textprops={'ha':'center'},
         wedgeprops = { 'linewidth': 3, 'edgecolor': 'white'}) # draw the second Pie chart
 ax1.pie(x3,
         startangle=90, colors= colors, pctdistance=0.8,
         # autopct = lambda p: format(p, '.1f') if p > 4 else None,
         autopct = lambda p: '{:.1f}%\n (2010)'.format(p) if p > 4 else None,
-        radius = 0.5,labeldistance=1.05, textprops={'fontweight': 'normal', 'fontsize': 12},
+        radius = 0.5,labeldistance=1.05, textprops={'ha':'center'},
         wedgeprops = { 'linewidth': 3, 'edgecolor': 'white'}) # draw the third Pie chart
-
-    # draw a circle
 centre_circle = plt.Circle((0,0), 0.25, fc="white", ) 
-fig1.gca().add_artist(centre_circle)
-title = "Die vorhandenen Sprachen auf den signs im Viertel Centru von Chisinau"
+title = "Die vorhandenen Sprachen auf den signs im Viertel \nCentru von Chisinau"
 subtitle = "Von innen nach außen wurden die Daten den folgenden Inhalten entnommen:\n2010 - Muth und Wolf (2010), S.7\n2014 - Korpus Mehrsprachigkeit nur im Jahr 2014 aufgenommene signs\n2017 - Korpus Mehrsprachigkeit in den Jahren 2013 bis 2017\naufgenommene signs"
 footnote = "Quelle: Wiesemann, April 2023"
-ax1.text(x=0.125, y=0.90, s=title, fontname='Arial', fontweight='bold', fontsize=20, ha='left', transform=fig1.transFigure)
-ax1.text(x = 0.125, y = 0.80, s = subtitle, fontname = 'Arial', fontsize = 16, ha='left', transform= fig1.transFigure)
-ax1.text(x= 0.1, y=0.10, s= footnote, fontname='Arial', fontstyle='italic', fontsize=12, ha='left', transform = fig1.transFigure)
+ax1.text(x=0.125, y=0.90, s=title, fontname='Arial', fontweight='bold', fontsize=14, ha='left', transform=fig1.transFigure)
+ax1.text(x = 0.125, y = 0.80, s = subtitle, fontname = 'Arial', fontsize = 12, ha='left', transform= fig1.transFigure)
+ax1.text(x= 0.125, y=0.08, s= footnote, fontname='Arial', fontstyle='italic', fontsize=12, ha='left', transform = fig1.transFigure)
 ax1.legend(labels=df_vorhanden.iloc[0:9, 0], loc="lower right")
+plt.subplots_adjust(top=0.8, wspace=0.3)
+plt.legend(labels=df_vorhanden.iloc[0:9, 0], loc=(1.0,0.40), fontsize=12)
+fig1 = plt.gcf()
+fig1.gca().add_artist(centre_circle)
+plt.axis('equal')
+plt.tight_layout(pad=3)
+plt.show()
 
 
-## C6 = DONUT CHART for dominante Sprache
+## C5 = DONUT CHART for dominante Sprache
     # load data to display the datatset 'Sprachen vorhanden'
 df_dominant = pd.read_csv('data/dominant.csv', sep=";")
 
@@ -73,44 +79,47 @@ ax2.pie(x1_2017,
         # autopct= '%1.0f%%, \n (2017)',
         autopct = lambda p: '{:.1f}%\n (2017)'.format(p) if p > 4 else None,
         radius=1.0,labeldistance=1.05, textprops={'fontweight': 'normal', 'fontsize': 12},
-        wedgeprops = { 'linewidth': 3, 'edgecolor': 'white'}) 
-    # draw the second Pie chart
+        wedgeprops = { 'linewidth': 3, 'edgecolor': 'white'}) # draw the first Pie chart \n (2017)
 ax2.pie(x2_2014,
         startangle=90, colors= colors_2, pctdistance=0.85, 
         # autopct= '%1.0f%%, \n (2014)', 
         autopct = lambda p: '{:.1f}%\n (2014)'.format(p) if p > 4 else None,
         radius=0.75,labeldistance=1.05, textprops={'fontweight': 'normal', 'fontsize': 12},
-        wedgeprops = { 'linewidth': 3, 'edgecolor': 'white'}) 
-    # draw the third Pie chart
+        wedgeprops = { 'linewidth': 3, 'edgecolor': 'white'}) # draw the second Pie chart
 ax2.pie(x3_2012,
         startangle=90, colors= colors_2, pctdistance=0.8, 
         # autopct= '%1.0f%% \n (2010)', 
         autopct = lambda p: '{:.1f}%\n (2012)'.format(p) if p > 4 else None,
         radius=0.5,labeldistance=1.05, textprops={'fontweight': 'normal', 'fontsize': 12},
-        wedgeprops = { 'linewidth': 3, 'edgecolor': 'white'}) 
-
-    # draw a circle
+        wedgeprops = { 'linewidth': 3, 'edgecolor': 'white'}) # draw the third Pie chart
 centre_circle = plt.Circle((0,0), 0.25, fc="white", ) 
-fig2.gca().add_artist(centre_circle)
-
 title= "Die dominanten Sprachen auf den signs im Viertel Centru in Chisinau"
 subtitle="Von innen nach außen wurden die Daten den folgenden Inhalten entnommen: \n    2012 - Muth (2012b), S.217\n    2014 - Korpus Mehrsprachigkeit nur im Jahr 2014 aufgenommene signs\n    2017 - Korpus Mehrsprachigkeit in den Jahren 2013 bis 2017 \n               aufgenommene signs"
 footnote = "Quelle: Wiesemann, April 2023"
-ax2.text(x = 0.125, y = 0.90, s = title, fontname = 'Arial', fontweight= 'bold', fontsize = 20, ha='left', transform= fig2.transFigure)
-ax2.text(x = 0.125, y = 0.80, s = subtitle, fontname = 'Arial', fontsize = 16, ha='left', transform= fig2.transFigure)
-ax2.text(x= 0.1, y=0.15, s= footnote, fontname='Arial', fontstyle='italic', fontsize=12, ha='left', transform = fig2.transFigure)
+ax2.text(x = 0.125, y = 0.90, s = title, fontname = 'Arial', fontweight= 'bold', fontsize = 14, ha='left', transform= fig2.transFigure)
+ax2.text(x = 0.125, y = 0.80, s = subtitle, fontname = 'Arial', fontsize = 12, ha='left', transform= fig2.transFigure)
+ax2.text(x= 0.125, y=0.15, s= footnote, fontname='Arial', fontstyle='italic', fontsize=12, ha='left', transform = fig2.transFigure)
 ax2.legend(labels=df_dominant.iloc[0:4, 0], loc="lower right")
+plt.legend(labels=df_dominant.iloc[0:4, 0], loc=(1.0,0.50), fontsize=12)
+fig2 = plt.gcf()
+fig2.gca().add_artist(centre_circle)
+plt.axis('equal')
+plt.tight_layout(pad = 3)
+plt.show()
+
+
 
 ## C3 
         # load data to display the dataset 'Korpus Mehrsprachigkeit'
 df = pd.read_csv('data/korpusdaten_multi.csv')
-df['WÖrum'] = df['ÜBSPrum'] + df['FTSPrum']
-df['WÖrus'] = df['ÜBSPruss'] + df['FTSPruss']
-df['WÖengl'] = df['ÜBSPengl'] + df['FTSPengl']
-df['WÖmold'] = df['ÜBSPmold'] + df['FTSPmold']
+
+
+
 
 # C2 = Wordcloud with Moldova Flag
 image2 = Image.open('images/moldova_img_better_better.png')
+
+
 
 # C7 = Sunkey Chart as flech for Größe der Werbeplakate and SPinsgesamt BITTE NOCH EINMAL IN DATEN SUCHEN-> NEUE TABELLE MUSS DAFÜR ERSTELLT WERDEN DANKE!
 df_sp = df[(df['SPinsgesamt'] == 'Rumänisch') | (df['SPinsgesamt'] == 'Russisch')\
@@ -128,63 +137,50 @@ ax7.set_ylabel('Anzahl')
 #Customize the legend title
 ax7.legend(title='Sprache des signs')
 
-# C9 = Wordcloud with Moldova Flag for english words
-image9 = Image.open('images/moldova_promotion_engl.png')
 
-# C5 = Wordcloud-Vergleich (Vergleich der Wörter auf russischen und auf englischen Werbeplakaten miteinander\)
+
+
+
+# C7 = Wordcloud with Moldova Flag for english words
+image7 = Image.open('images/moldova_promotion_engl.png')
+
+
+# C6 = Wordcloud-Vergleich (Vergleich der Wörter auf russischen und auf englischen Werbeplakaten miteinander\)
 # grün= auf beiden vorkommend, blau = nur auf russischen WPs vorkommend, red = nur auf englischen WPS vorkommend
-image5 = Image.open('images/moldova_wordcloud_engl_ru.png')
+image6 = Image.open('images/moldova_wordcloud_engl_ru.png')
 
-# C8 = altair Diagramme einfügen
-# Make radio button less cramped by adding a space after each label
-# The spacing will only show up in your IDE, not on this doc page
-# options = ['A0-A1', 'A2-A3', 'A4', 'A5', '<A5']
-# labels = [option + ' ' for option in options]
 
-# input_dropdown = alt.binding_radio(
-#     # Add the empty selection which shows all when clicked
-#     options=options + [None],
-#     labels=labels + ['All'],
-#     name='Größe: '
-# )
-# # problem with selection_point
-# selection = alt.selection_point(
-#     fields=['Größe'],
-#     bind=input_dropdown,
-# )
 
-# chart = alt.Chart(df).mark_point().encode(
-#     x='WÖrum:Q',
-#     y='WÖrus:Q',
-#     # We need to set a constant domain to preserve the colors
-#     # when only one region is shown at a time
-#     color=alt.Color('Größe:N').scale(domain=options),
-# ).add_params(
-#     selection
-# ).transform_filter(
-#     selection
-# )
+
 
 ## Set the LAYOUT 
-c2, c3 = st.columns([3,1])
-c4, c6 = st.columns(2)
-c7, c9 = st.columns(2)
+c1, c2 = st.columns([1,3])
+c3, c4, c5 = st.columns(3)
+
+c6, c7 = st.columns([2,1])
+c8, c9 = st.columns(2)
+
+
+
+
 
 with st.container():
     # c1.write("Pie Chart Korpus Mehrsprachigkeit Sprachverteilung")
-    # # c1.write(fig3)
+    c1.write("Hello World Graph lost")
     c2.image(image2, caption='Wordcloud aller Werbeplakate im Korpus Mehrsprachigkeit', use_column_width=True)
-    c3.write("Datenüberblick des Korpus Mehrsprachigkeit")
+
+with st.container():   
+    c3.write("Korpus Mehrsprachigkeit")
     c3.write(df.head(20))
+    c4.write(fig1)
+    c5.write(fig2)
+    
+with st.container(): 
+    c6.write(image6, caption="WordCloud: Vergleich Wörter der russischen und englischen Werbeplakate (grün- auf beiden vorkommend, rot- auf englischen WPs, blau- auf russischen WPs)", use_column_width=True)
+    c7.write(image7, caption="WordCloud der Wörter auf englischen Werbeplakaten", use_column_width=True)
 
 with st.container(): 
-    c7.write("Diagramm Größe des Werbeplakates und Sprache vorhanden- BITTE EIN SANKEY DIAGRAM DARAUS MACHEN DANKE!")
-    c7.write(fig7)
-    # c8.write(chart) 
-    # "Wörter ro und Wörter Russisch und Größe der Werbeplakate mit slider NOCH EINEN TITEL EINFÜGEN DANKE!")
-    c9.image(image9, caption="WordCloud der Wörter auf englischen Werbeplakaten", use_column_width=True)
-    c9.image(image5, caption="WordCloud: Vergleich Wörter der russischen und englischen Werbeplakate (grün- auf beiden vorkommend, rot- auf englischen WPs, blau- auf russischen WPs)", use_column_width=True)
-    
-with st.container():
-    c4.write(fig1)
-    c6.write(fig2)
+    #Altair
+    c8.write("Diagramm Größe des Werbeplakates und Sprache vorhanden- BITTE EIN SANKEY DIAGRAM DARAUS MACHEN DANKE!")
+    c8.write(fig7)
+    c9.write("Wörter ro und Wörter Russisch und Größe der Werbeplakate mit slider NOCH EINEN TITEL EINFÜGEN DANKE!")
