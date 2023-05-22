@@ -25,7 +25,7 @@ x2 = df_vorhanden.iloc[9:18, 1] # 2014
 x1 = df_vorhanden.iloc[27:36, 1] #2017
     # color
 colors = ['#277da1', '#577590', '#4d908e', '#43aa8b', '#90be6d', '#f9c74f', '#f9844a', '#f8961e', '#f3722c']
-fig1,ax1 = plt.subplots(figsize = (12, 10))
+fig1,ax1 = plt.subplots(figsize = (12, 14))
 ax1.pie(x1,
         startangle=90, colors= colors, pctdistance=0.88, 
         # autopct = lambda p: format(p, '.1f') if p > 4 else None,
@@ -151,7 +151,6 @@ image6 = Image.open('images/moldova_wordcloud_engl_ru.png')
 
 # C8 = altair Diagramme einfügen
 alt.data_transformers.disable_max_rows()
-
 df = pd.read_csv('data/korpusdaten_multi.csv')
 df['WÖrum'] = df['ÜBSPrum'] + df['FTSPrum']
 df['WÖrus'] = df['ÜBSPruss'] + df['FTSPruss']
@@ -164,11 +163,11 @@ selection = alt.selection_multi(
 scatter1= alt.Chart(df).mark_circle(size=50).encode(
     x=alt.Y('WÖrum:Q', title = "Anzahl der rumänischen Wörter", scale=alt.Scale(zero=False)),
     y=alt.Y('WÖrus:Q', title = "Anzahl der russischen Wörter", scale=alt.Scale(zero=False)),
-    tooltip=['WÖrum', 'WÖrus'], # information to display on mouse hover
+    tooltip=['SPinsgesamt'], # information to display on mouse hover
     color = 'Größe',
     opacity=alt.condition(selection, alt.value(1), alt.value(0.1))
 ).properties(
-    height=350, width=600,
+    height=350, width=500,
     title="Vergleich der rumänischen und russischen Wortanzahl an der Größe des Werbeplakates"
 ).configure_title(
     fontSize=14
@@ -176,18 +175,15 @@ scatter1= alt.Chart(df).mark_circle(size=50).encode(
     selection
 ).interactive()
 
-
-
 ## Set the LAYOUT 
 ## c1 -> CREATE SANKEY 
     ## c1, c2 = st.columns([1,3])
 c2, c3 = st.columns([3,1])
     ## c3, c4, c5 = st.columns(3)
 c4, c5 = st.columns(2)
-
-# c6, c7 = st.columns([2,1])
-c9, c10, c11 = st.columns(3)
-
+    # c6, c7 = st.columns([2,1])
+c9, c10 = st.columns(2)
+c11, c12 = st.columns(2)
 
 
 
@@ -212,4 +208,6 @@ with st.container():
     # "Wörter ro und Wörter Russisch und Größe der Werbeplakate mit slider NOCH EINEN TITEL EINFÜGEN DANKE!")
     c9.image(image7, caption="WordCloud der Wörter auf englischen Werbeplakaten", use_column_width=True)
     c10.image(image6, caption="WordCloud: Vergleich Wörter der russischen und englischen Werbeplakate (grün- auf beiden vorkommend, rot- auf englischen WPs, blau- auf russischen WPs)", use_column_width=True)
+with st.container():
     c11.write(scatter1)
+    c12.write("Combo chart")
