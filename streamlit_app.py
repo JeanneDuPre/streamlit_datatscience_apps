@@ -178,6 +178,34 @@ image6 = Image.open('images/moldova_wordcloud_engl_ru.png')
 # ).transform_filter(
 #     selection
 # )
+## 
+alt.data_transformers.disable_max_rows()
+
+df = pd.read_csv('data/korpusdaten_multi.csv')
+df['WÖrum'] = df['ÜBSPrum'] + df['FTSPrum']
+df['WÖrus'] = df['ÜBSPruss'] + df['FTSPruss']
+df['WÖengl'] = df['ÜBSPengl'] + df['FTSPengl']
+df['WÖmold'] = df['ÜBSPmold'] + df['FTSPmold']
+
+selection = alt.selection_multi(
+   fields=['Größe'], bind='legend'
+)
+scatter1= alt.Chart(df).mark_circle(size=50).encode(
+    x=alt.Y('WÖrum:Q', title = "Anzahl der rumänischen Wörter", scale=alt.Scale(zero=False)),
+    y=alt.Y('WÖrus:Q', title = "Anzahl der russischen Wörter", scale=alt.Scale(zero=False)),
+    tooltip=['WÖrum', 'WÖrus'], # information to display on mouse hover
+    color = 'Größe',
+    opacity=alt.condition(selection, alt.value(1), alt.value(0.1))
+).properties(
+    height=350, width=600,
+    title="Vergleich der rumänischen und russischen Wortanzahl an der Größe des Werbeplakates"
+).configure_title(
+    fontSize=14
+).add_selection(
+    selection
+).interactive()
+
+
 
 ## Set the LAYOUT 
 ## c1 -> CREATE SANKEY 
@@ -187,7 +215,7 @@ c2, c3 = st.columns([3,1])
 c4, c5 = st.columns(2)
 
 # c6, c7 = st.columns([2,1])
-c9, c10 = st.columns(2)
+c9, c10, c11 = st.columns(3)
 
 
 
@@ -213,3 +241,4 @@ with st.container():
     # "Wörter ro und Wörter Russisch und Größe der Werbeplakate mit slider NOCH EINEN TITEL EINFÜGEN DANKE!")
     c9.image(image7, caption="WordCloud der Wörter auf englischen Werbeplakaten", use_column_width=True)
     c10.image(image6, caption="WordCloud: Vergleich Wörter der russischen und englischen Werbeplakate (grün- auf beiden vorkommend, rot- auf englischen WPs, blau- auf russischen WPs)", use_column_width=True)
+    c11.write(scatter1)
