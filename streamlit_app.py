@@ -10,8 +10,8 @@ from PIL import Image
 st. set_page_config(layout="wide")
 # Set page title
 st.title('Korpus Mehrsprachigkeit')
-st.caption('Chisinau | Republik Moldau | von 2013 bis 2017 | 5981 | signs')
-
+st.caption('Chisinau | Republik Moldau | von 2013 bis 2017 | 5981 signs')
+st.caption('inspiriert vom Bootcamp lewagon | WordCloud | Python')
 ## C1 = Sankey Chart with Sprachverteilung im Korpus Mehrsprachigkeit DANKE!
 
 
