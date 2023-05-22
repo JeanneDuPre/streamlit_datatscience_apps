@@ -180,11 +180,14 @@ image6 = Image.open('images/moldova_wordcloud_engl_ru.png')
 # )
 
 ## Set the LAYOUT 
-c1, c2 = st.columns([1,3])
-c3, c4, c5 = st.columns(3)
+## c1 -> CREATE SANKEY 
+    ## c1, c2 = st.columns([1,3])
+c2, c3 = st.columns([3,1])
+    ## c3, c4, c5 = st.columns(3)
+c4, c5 = st.columns(2)
 
-c6, c7 = st.columns([2,1])
-c8, c9 = st.columns(2)
+# c6, c7 = st.columns([2,1])
+c9, c10 = st.columns(2)
 
 
 
@@ -192,23 +195,21 @@ c8, c9 = st.columns(2)
 
 with st.container():
     # c1.write("Pie Chart Korpus Mehrsprachigkeit Sprachverteilung")
-    c1.write("Hello World Graph lost")
+    # c1.write("Hello World Graph lost")
     c2.image(image2, caption='Wordcloud aller Werbeplakate im Korpus Mehrsprachigkeit', use_column_width=True)
-
-with st.container():   
     c3.write("Korpus Mehrsprachigkeit")
     c3.write(df.head(20))
+    
+with st.container():   
+    # c3.write("Korpus Mehrsprachigkeit")
+    # c3.write(df.head(20))
     c4.write(fig1)
     c5.write(fig2)
     
 with st.container(): 
-    c7.write("Diagramm Größe des Werbeplakates und Sprache vorhanden- BITTE EIN SANKEY DIAGRAM DARAUS MACHEN DANKE!")
-    c7.write(fig7)
+    # c7.write("Diagramm Größe des Werbeplakates und Sprache vorhanden- BITTE EIN SANKEY DIAGRAM DARAUS MACHEN DANKE!")
+    # c7.write(fig7)
     # c8.write(chart) 
     # "Wörter ro und Wörter Russisch und Größe der Werbeplakate mit slider NOCH EINEN TITEL EINFÜGEN DANKE!")
     c9.image(image7, caption="WordCloud der Wörter auf englischen Werbeplakaten", use_column_width=True)
-    c9.image(image6, caption="WordCloud: Vergleich Wörter der russischen und englischen Werbeplakate (grün- auf beiden vorkommend, rot- auf englischen WPs, blau- auf russischen WPs)", use_column_width=True)
-    
-with st.container():
-    c4.write(fig1)
-    c6.write(fig2)
+    c10.image(image6, caption="WordCloud: Vergleich Wörter der russischen und englischen Werbeplakate (grün- auf beiden vorkommend, rot- auf englischen WPs, blau- auf russischen WPs)", use_column_width=True)
