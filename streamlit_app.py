@@ -150,35 +150,6 @@ image7 = Image.open('images/moldova_promotion_engl.png')
 image6 = Image.open('images/moldova_wordcloud_engl_ru.png')
 
 # C8 = altair Diagramme einfügen
-# Make radio button less cramped by adding a space after each label
-# The spacing will only show up in your IDE, not on this doc page
-# options = ['A0-A1', 'A2-A3', 'A4', 'A5', '<A5']
-# labels = [option + ' ' for option in options]
-
-# input_dropdown = alt.binding_radio(
-#     # Add the empty selection which shows all when clicked
-#     options=options + [None],
-#     labels=labels + ['All'],
-#     name='Größe: '
-# )
-# # problem with selection_point
-# selection = alt.selection_point(
-#     fields=['Größe'],
-#     bind=input_dropdown,
-# )
-
-# chart = alt.Chart(df).mark_point().encode(
-#     x='WÖrum:Q',
-#     y='WÖrus:Q',
-#     # We need to set a constant domain to preserve the colors
-#     # when only one region is shown at a time
-#     color=alt.Color('Größe:N').scale(domain=options),
-# ).add_params(
-#     selection
-# ).transform_filter(
-#     selection
-# )
-## 
 alt.data_transformers.disable_max_rows()
 
 df = pd.read_csv('data/korpusdaten_multi.csv')
