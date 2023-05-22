@@ -1,8 +1,9 @@
-# requirements.txt file to install app dependencies
-pandas
-numpy
-streamlit
-matplotlib
-altair 
-seaborn
-PIL
+altair==4.2.0
+altair-data-server==0.4.1
+altair-viewer==0.4.0
+matplotlib==3.5.3
+numpy==1.23.5
+pandas==1.5.3
+Pillow==9.1.1
+seaborn==0.11.2
+streamlit==1.11.1
