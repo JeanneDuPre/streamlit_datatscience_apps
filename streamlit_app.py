@@ -97,7 +97,7 @@ subtitle="Von innen nach außen wurden die Daten den folgenden Inhalten entnomme
 footnote = "Quelle: Wiesemann, April 2023"
 ax2.text(x = 0.125, y = 0.90, s = title, fontname = 'Arial', fontweight= 'bold', fontsize = 14, ha='left', transform= fig2.transFigure)
 ax2.text(x = 0.125, y = 0.80, s = subtitle, fontname = 'Arial', fontsize = 12, ha='left', transform= fig2.transFigure)
-ax2.text(x= 0.125, y=0.15, s= footnote, fontname='Arial', fontstyle='italic', fontsize=12, ha='left', transform = fig2.transFigure)
+ax2.text(x= 0.125, y=0.08, s= footnote, fontname='Arial', fontstyle='italic', fontsize=12, ha='left', transform = fig2.transFigure)
 ax2.legend(labels=df_dominant.iloc[0:4, 0], loc=(1.0,0.50), fontsize=12)
 plt.subplots_adjust(top=0.8, wspace=0.3)
 fig2 = plt.gcf()
