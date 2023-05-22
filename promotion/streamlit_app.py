@@ -206,8 +206,8 @@ with st.container():
     c7.write(fig7)
     # c8.write(chart) 
     # "Wörter ro und Wörter Russisch und Größe der Werbeplakate mit slider NOCH EINEN TITEL EINFÜGEN DANKE!")
-    c9.image(image9, caption="WordCloud der Wörter auf englischen Werbeplakaten", use_column_width=True)
-    c9.image(image5, caption="WordCloud: Vergleich Wörter der russischen und englischen Werbeplakate (grün- auf beiden vorkommend, rot- auf englischen WPs, blau- auf russischen WPs)", use_column_width=True)
+    c9.image(image7, caption="WordCloud der Wörter auf englischen Werbeplakaten", use_column_width=True)
+    c9.image(image6, caption="WordCloud: Vergleich Wörter der russischen und englischen Werbeplakate (grün- auf beiden vorkommend, rot- auf englischen WPs, blau- auf russischen WPs)", use_column_width=True)
     
 with st.container():
     c4.write(fig1)
