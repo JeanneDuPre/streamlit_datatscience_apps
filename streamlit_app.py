@@ -51,7 +51,7 @@ footnote = "Quelle: Wiesemann, April 2023"
 ax1.text(x=0.125, y=0.90, s=title, fontname='Arial', fontweight='bold', fontsize=14, ha='left', transform=fig1.transFigure)
 ax1.text(x = 0.125, y = 0.80, s = subtitle, fontname = 'Arial', fontsize = 12, ha='left', transform= fig1.transFigure)
 ax1.text(x= 0.125, y=0.08, s= footnote, fontname='Arial', fontstyle='italic', fontsize=12, ha='left', transform = fig1.transFigure)
-ax1.legend(labels=df_vorhanden.iloc[0:9, 0], , loc=(1.0,0.40), fontsize=12)
+ax1.legend(labels=df_vorhanden.iloc[0:9, 0], loc=(1.0,0.40), fontsize=12)
 plt.subplots_adjust(top=0.8, wspace=0.3)
 fig1 = plt.gcf()
 fig1.gca().add_artist(centre_circle)
